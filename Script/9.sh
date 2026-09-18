@@ -54,7 +54,9 @@ Choose wisely which door you open to The Wired.
 "No matter where you go, everyone's connected."
 — Lain Iwakura
 
-# Terus
+# Terus (HAPUS DULU FILE DI LOKAL MIKA SEBELUM GET)
+get protocol7_manifesto.txt
+
 put /root/protocol7_manifesto.txt
 
 # Kalo permission denied berarti bener
