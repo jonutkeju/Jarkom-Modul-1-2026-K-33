@@ -296,5 +296,7 @@ nc 10.4.89.247 3407
 | IP server HTTPS | `93.184.216.34` |
 | User-Agent | `curl/7.62.0` |
 | Method + path request | `HEAD /` |
+
+
 **Flag:** `KOMJAR26{TLS_D3crypt_dJhAWIgytZs1jm4DqRKGaKFiG}`
 ![Nama Alternatif](ss/58.png)
