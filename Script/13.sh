@@ -25,8 +25,9 @@ pkill sshd
 /usr/sbin/sshd
 
 # Mika
+# Hapus entry lama dulu pakai ssh-keygen -R 10.80.3.10
 ssh admin_mika@10.80.3.10
-Login berhasil tanpa password
+# Login berhasil tanpa password
 exit
 
 # Ke Wireshark capture antara Lain dgn Switch 3
