@@ -12,15 +12,15 @@ nc 10.4.89.247 3401
 
 ### Penyelesaian dan Hasil Analisis
 1. Filter dengan `http.request.method == "POST"` di kolom filter (menyaring semua request POST dan biasanya digunakan untuk mengirim username dan password)
-![Nama Alternatif](ss/2.png)
+![Nama Alternatif](ss/02.png)
 2. Terlihat banyak request `POST /login.php` yang berulang-ulang ke IP yang sama:
    - **Source (IP penyerang):** `172.26.7.50`
    - **Destination (IP target):** `172.26.7.100`, port tujuan **8080**
 3. Ganti filter dengan `http.response.code == 200` (mencari respon berhasil login, respon status 200)
-![Nama Alternatif](ss/3.png)
+![Nama Alternatif](ss/03.png)
 4. Pada paket response yang sukses tadi **Follow > HTTP Stream**
-![Nama Alternatif](ss/4.png)
-![Nama Alternatif](ss/5.png)
+![Nama Alternatif](ss/04.png)
+![Nama Alternatif](ss/05.png)
 5. Ditemukan:
    - Kredensial: `username=lain_admin&password=wired_pr0tocol_7`
    - Header response server: `Server: Apache/2.4.62`
@@ -33,7 +33,7 @@ nc 10.4.89.247 3401
 | Password user `lain_admin` yang berhasil | `wired_pr0tocol_7` |
 | Web server & versi | `Apache/2.4.62` |
 **Flag:** `KOMJAR26{W1r3d_Brut3_WWhushWurqOHdQEJJgBB2eRtO}`
-![Nama Alternatif](ss/7.png)
+![Nama Alternatif](ss/07.png)
 
 ## Soal 15
 **Deskripsi Soal:** Eiri menyusup ke ruang server dan memasang perangkat keyboard USB berbahaya pada node Alice.
@@ -51,7 +51,7 @@ nc 10.4.89.247 3402
 1. Menemukan **GET DESCRIPTOR Response DEVICE**. Dalam bagian detail paket DEVICE DESCRIPTOR ditemukan:
    - **idVendor:** `Logitech, Inc. (0x046d)`
    - **idProduct:** `Keyboard K120 (0xc31c)`
-   ![Nama Alternatif](ss/9.png)
+   ![Nama Alternatif](ss/09.png)
 2. Mencari **device address** keyboardnya menggunakan tshark di terminal:
    ```
    tshark -r wired_usb_hid.pcap -T fields -e usb.device_address | sort -u
