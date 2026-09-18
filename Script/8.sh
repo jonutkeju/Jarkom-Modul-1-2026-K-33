@@ -41,6 +41,7 @@ EOF
 
 lftp -u alice 10.80.2.10
 
+# Hapus dulu yang lama di CHISA pakai  rm -f /var/wired/data/report.txt
 put /root/report.txt
 
 exit
