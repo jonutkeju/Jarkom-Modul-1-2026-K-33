@@ -1,10 +1,12 @@
-## Member
+# JARKOM MODUL 1 | K-33
+GNS3 dan Wireshark
+
+## Anggota
 
 | Nama | NRP |
 | :--- | :--- |
 | Jonathan Steven Tjahjaputra | 5027251036 |
 | Helen Audya Yuniarini | 5027251069 |
-
 ---
 
 # Laporan
@@ -15,9 +17,7 @@ Pada praktikum ini dibuat sebuah topologi jaringan yang terdiri dari satu router
 
 Struktur topologi yang digunakan:
 
-```sh
-GAMBAR DISINI
-```
+![Nama Alternatif](src/59.png)
 
 Pembagian alamat IP menggunakan prefix kelompok `10.80.x.x`.
 
@@ -41,11 +41,7 @@ Router `Lain` menggunakan tiga interface internal untuk melayani ketiga subnet t
 
 Konfigurasi interface pada router `Lain` dibuat menggunakan alamat statis untuk masing-masing subnet.
 
-Lokasi File konfigurasi:
-
-```sh
-/etc/network/interfaces
-```
+Lokasi File konfigurasi terletak pada `/etc/network/interfaces`
 
 Konfigurasi yang digunakan:
 
@@ -210,6 +206,8 @@ Script digunakan untuk memeriksa interface jaringan dan aturan NAT yang sedang a
 
 Konfigurasi yang berada di `/root` juga digunakan sebagai tempat penyimpanan script pemulihan ketika konfigurasi node perlu dibuat kembali.
 
+![](src/60.png)
+
 ---
 
 ## 6. Traffic ICMP dan DNS
@@ -250,6 +248,8 @@ Traffic dianalisis menggunakan filter Wireshark:
 ```text
 dns || icmp
 ```
+
+![](src/61.png)
 
 Hasil capture dapat digunakan untuk mengamati Echo Request, Echo Reply, DNS query, dan DNS response.
 
@@ -359,6 +359,8 @@ Jika transfer berhasil, server memberikan:
 
 Pada mode PASV, port data dihitung dari dua nilai yang diberikan server.
 
+![](src/62.png)
+
 Pada hasil capture yang diperoleh:
 
 ```text
@@ -406,6 +408,8 @@ get protocol7_manifesto.txt
 
 Operasi `get` berhasil karena Mika memiliki hak baca.
 
+![](src/63.png)
+
 Kemudian dilakukan pengujian untuk membuktikan bahwa Mika tidak memiliki hak tulis.
 
 Setelah membuat file pengujian:
@@ -431,6 +435,11 @@ Pengujian koneksi dilakukan dari Knights menuju Chisa menggunakan payload 128 by
 ```bash
 ping -c 77 -s 128 -i 0.3 10.80.2.10
 ```
+
+![](src/64.png)
+![](src/65.png)
+![](src/66.png)
+![](src/67.png)
 
 Hasil pengujian:
 
@@ -464,17 +473,7 @@ Tidak terdapat packet loss karena seluruh 77 paket yang dikirim menerima balasan
 
 ## 11. Pengujian Kelemahan Telnet
 
-Untuk pengujian Telnet dibuat akun:
-
-```text
-phantom_user
-```
-
-dengan password:
-
-```text
-wired_ghost
-```
+Untuk pengujian Telnet dibuat akun `phantom_user`dengan password `wired_ghost`
 
 Telnet server dijalankan pada Chisa menggunakan port 23:
 
@@ -487,6 +486,13 @@ Koneksi dari Eiri:
 ```bash
 telnet 10.80.2.10
 ```
+Console Chisa:
+
+![](src/68.png)
+
+Console Eiri:
+
+![](src/69.png)
 
 Login:
 
@@ -501,6 +507,10 @@ Traffic ditangkap menggunakan filter:
 tcp.port == 23
 ```
 
+Yang ditangkap pada Wireshark:
+
+![](src/70.png)
+
 Melalui fitur **Follow TCP Stream**, username dan password dapat diamati sebagai plaintext.
 
 Hal tersebut menunjukkan kelemahan utama Telnet, yaitu data sesi tidak dilindungi dengan enkripsi.
@@ -512,6 +522,10 @@ Pada komunikasi interaktif Telnet juga dapat ditemukan banyak paket TCP berukura
 ## 12. Port Scanning dari Alice ke Knights
 
 Pada pengujian ini Alice berperan sebagai scanner dan Knights sebagai target.
+
+Setup Knights:
+
+![](src/71.png)
 
 Target:
 
@@ -535,11 +549,15 @@ nc -vz 10.80.3.10 80
 nc -vz 10.80.3.10 7777
 ```
 
+![](src/72.png)
+
 Capture Wireshark menggunakan:
 
 ```text
 tcp.port == 22 || tcp.port == 80 || tcp.port == 7777
 ```
+
+![](src/73.png)
 
 Untuk port terbuka terlihat TCP three-way handshake:
 
@@ -619,6 +637,8 @@ ssh -v admin_mika@10.80.3.10
 
 Pada output dapat terlihat bahwa private key Mika digunakan untuk melakukan autentikasi public key.
 
+![](src/74.png)
+
 ### Analisis Wireshark
 
 Capture dilakukan pada jalur:
@@ -676,6 +696,8 @@ Pada tahap Key Exchange, kedua pihak melakukan negosiasi parameter kriptografi d
 Setelah pesan `New Keys`, paket berikutnya ditampilkan sebagai encrypted packet. Isi autentikasi dan data sesi SSH tidak dapat dibaca secara langsung melalui packet capture.
 
 Hal ini berbeda dengan Telnet. Pada Telnet, username dan password dapat terlihat sebagai plaintext melalui Follow TCP Stream. Pada SSH, komunikasi setelah proses pertukaran kunci dilindungi oleh enkripsi.
+
+![](src/75.png)
 
 ---
 
