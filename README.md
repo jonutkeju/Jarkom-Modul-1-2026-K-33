@@ -2,9 +2,8 @@
 
 | Nama | NRP |
 | :--- | :--- |
-| [Nama Anggota 1] | [NRP] |
-| [Nama Anggota 2] | [NRP] |
-| [Nama Anggota 3] | [NRP] |
+| Jonathan Steven Tjahjaputra | 5027251036 |
+| Helen Audya Yuniarini | 5027251069 |
 
 ---
 
